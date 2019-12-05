@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=btMN9vHYHHO2dO2YqNrLgoGN2qq4RKkl"></script>
+	<title>我的家乡——温州</title>
+</head>
+<body>
+	<div id="allmap"></div>
+	<p>制作：信管1701 林恒旭</p>
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(120.706477,28.001085);
+	map.centerAndZoom(point,12);
+	var marker = new BMap.Marker(point);
+	map.addOverlay(marker);
+	var sContent =
+	"<h4 style='margin:0 0 5px 0;padding:0.2em 0'>我的家乡——温州</h4>" + 
+	"<img style='float:right;margin:4px' id='imgDemo' src='./wz.jpg' width='139' height='104' title='温州'/>" + 
+	"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>温州，简称“温”或“瓯”，浙江省地级市；是国家历史文化名城，东南沿海重要的商贸城市，浙江省区域中心城市之一。温州位于浙江省东南部，瓯江下游南岸。全市陆域面积11612.94平方千米，海域面积约11000平方千米。全市辖4个市辖区、5个县、3个县级市。2018年，户籍人口828.7万人，常住人口925万人。</p>" + 
+	"</div>";
+	
+	var infoWindow = new BMap.InfoWindow(sContent);
+	
+	marker.addEventListener("click", function(){          
+	   this.openInfoWindow(infoWindow);
+	   //图片加载完毕重绘infowindow
+	   document.getElementById('imgDemo').onload = function (){
+		   infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+	   }
+	});
+</script>
